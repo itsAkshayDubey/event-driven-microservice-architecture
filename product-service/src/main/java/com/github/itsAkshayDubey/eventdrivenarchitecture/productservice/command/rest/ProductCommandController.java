@@ -16,7 +16,7 @@ import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.ent
 
 @RestController
 @RequestMapping(path = "/api")
-public class ProductController {
+public class ProductCommandController {
 
 	@Autowired
 	Environment env;
