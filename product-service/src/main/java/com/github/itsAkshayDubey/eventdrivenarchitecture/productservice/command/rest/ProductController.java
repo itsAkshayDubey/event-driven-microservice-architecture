@@ -1,4 +1,4 @@
-package com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.controller;
+package com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.command.rest;
 
 import java.util.UUID;
 
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.command.CreateProductCommand;
-import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.entity.Product;
-import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.request.ProductRequest;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.entity.Product;
 
 @RestController
 @RequestMapping(path = "/api")

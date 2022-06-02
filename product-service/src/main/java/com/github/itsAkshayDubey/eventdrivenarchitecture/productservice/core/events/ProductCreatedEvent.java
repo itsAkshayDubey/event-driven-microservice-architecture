@@ -1,4 +1,4 @@
-package com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.events;
+package com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.events;
 
 import java.math.BigDecimal;
 

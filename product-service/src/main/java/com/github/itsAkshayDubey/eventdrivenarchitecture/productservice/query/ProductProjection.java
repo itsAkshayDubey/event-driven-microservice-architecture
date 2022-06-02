@@ -5,9 +5,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.entity.Product;
-import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.events.ProductCreatedEvent;
-import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.repo.ProductRepository;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.entity.Product;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.events.ProductCreatedEvent;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.repo.ProductRepository;
 
 @Component
 public class ProductProjection {

@@ -1,4 +1,4 @@
-package com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.request;
+package com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.command.rest;
 
 import java.math.BigDecimal;
 
