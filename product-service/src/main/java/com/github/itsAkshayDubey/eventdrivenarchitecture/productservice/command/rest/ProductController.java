@@ -25,7 +25,7 @@ public class ProductController {
 	CommandGateway cg;
 	
 	@PostMapping("/product")
-	public String getProduct(@RequestBody ProductRequest product) {
+	public String getProduct(@RequestBody ProductRestModel product) {
 		
 		CreateProductCommand cpc = CreateProductCommand.builder().price(product.getPrice())
 				.title(product.getTitle())
