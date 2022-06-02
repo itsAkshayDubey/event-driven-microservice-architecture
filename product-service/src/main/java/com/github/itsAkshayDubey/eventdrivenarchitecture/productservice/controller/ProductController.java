@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.command.CreateProductCommand;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.entity.Product;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.request.ProductRequest;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -25,7 +26,7 @@ public class ProductController {
 	CommandGateway cg;
 	
 	@PostMapping("/product")
-	public String getProduct(@RequestBody Product product) {
+	public String getProduct(@RequestBody ProductRequest product) {
 		
 		CreateProductCommand cpc = CreateProductCommand.builder().price(product.getPrice())
 				.title(product.getTitle())
