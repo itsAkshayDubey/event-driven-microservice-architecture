@@ -32,13 +32,7 @@ public class ProductCommandController {
 				.quantity(product.getQuantity())
 				.productId(UUID.randomUUID().toString())
 				.build();
-		String returnValue = null;
-		try {
-			returnValue= cg.sendAndWait(cpc);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		String returnValue = cg.sendAndWait(cpc);
 		return returnValue;
 	}
 	
