@@ -7,6 +7,7 @@ import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.beans.BeanUtils;
 
+import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.ReserveProductCommand;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.rest.OrderStatus;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderCreatedEvent;
 
@@ -33,7 +34,7 @@ public class OrderAggregate {
 
 		AggregateLifecycle.apply(oce);
 	}
-
+	
 	@EventSourcingHandler
 	public void on(OrderCreatedEvent oce) {
 		

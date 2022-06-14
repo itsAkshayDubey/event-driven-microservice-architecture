@@ -7,12 +7,18 @@ import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
+import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.ReserveProductCommand;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.ProductReservedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.events.ProductCreatedEvent;
 
 @Aggregate
 public class ProductAggregate {
+	
+	private final Logger LOGGER = LoggerFactory.getLogger(ProductAggregate.class);
 	
 	@AggregateIdentifier
 	private String productId;
@@ -38,12 +44,36 @@ public class ProductAggregate {
 		AggregateLifecycle.apply(pce);
 	}
 	
+	@CommandHandler
+	public void handle(ReserveProductCommand rpc) {
+		
+		LOGGER.info("Inside handle RPC");
+		
+		if(quantity<rpc.getQuantity()) {
+			throw new IllegalArgumentException("Less items in stock. :(");
+		}
+		
+		ProductReservedEvent pre = ProductReservedEvent.builder()
+				.orderId(rpc.getOrderId())
+				.quantity(rpc.getQuantity())
+				.productId(rpc.getProductId())
+				.userId(rpc.getUserId())
+				.build();
+		
+		AggregateLifecycle.apply(pre);
+	}
+	
 	@EventSourcingHandler
 	public void on(ProductCreatedEvent pce) {
 		this.productId = pce.getProductId();
 		this.title = pce.getTitle();
 		this.price = pce.getPrice();
 		this.quantity = pce.getQuantity();
+	}
+	
+	@EventSourcingHandler
+	public void on(ProductReservedEvent pre) {
+		this.quantity -= pre.getQuantity();
 	}
 	
 }

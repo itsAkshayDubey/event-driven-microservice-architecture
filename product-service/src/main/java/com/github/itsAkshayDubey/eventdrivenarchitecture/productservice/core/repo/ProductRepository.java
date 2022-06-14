@@ -8,4 +8,5 @@ import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.ent
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String>{
 
+	Product findByProductId(String productId);
 }
