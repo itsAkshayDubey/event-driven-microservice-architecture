@@ -8,13 +8,18 @@ import org.axonframework.commandhandling.CommandMessage;
 import org.axonframework.messaging.MessageDispatchInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.command.CreateProductCommand;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.entity.ProductLookupEntity;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.repo.ProductLookupRepo;
 
 @Component
 public class CreateProductCommandInterceptor implements MessageDispatchInterceptor<CommandMessage<?>>{
 
+	@Autowired
+	private ProductLookupRepo repo;
 	private final Logger LOGGER = LoggerFactory.getLogger(CreateProductCommandInterceptor.class);
 	
 	@Override
@@ -28,11 +33,11 @@ public class CreateProductCommandInterceptor implements MessageDispatchIntercept
 				
 				CreateProductCommand cpc = (CreateProductCommand) command.getPayload();
 				
-				if(cpc.getPrice().compareTo(BigDecimal.ZERO)<=0)
-					throw new IllegalArgumentException("Price cannot be less than zero");
+				ProductLookupEntity entity =  repo.findByProductIdOrTitle(cpc.getProductId(), cpc.getTitle());
 				
-				if(cpc.getTitle()==null || cpc.getTitle().isEmpty())
-					throw new IllegalArgumentException("Title cannot be empty");
+				if(entity!=null)
+					throw new IllegalStateException(String.format("Product exists", cpc.getProductId(),cpc.getTitle()));
+				
 			}
 			
 			return command;

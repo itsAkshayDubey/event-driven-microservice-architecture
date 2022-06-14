@@ -1,5 +1,6 @@
 package com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.query;
 
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.eve
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.repo.ProductRepository;
 
 @Component
+@ProcessingGroup(value = "product-group")
 public class ProductProjection {
 	
 	@Autowired
