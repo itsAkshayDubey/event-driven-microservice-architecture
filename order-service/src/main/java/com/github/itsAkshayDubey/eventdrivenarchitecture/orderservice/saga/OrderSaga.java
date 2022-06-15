@@ -8,7 +8,9 @@ import org.axonframework.commandhandling.CommandMessage;
 import org.axonframework.commandhandling.CommandResultMessage;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
+import org.axonframework.modelling.saga.EndSaga;
 import org.axonframework.modelling.saga.SagaEventHandler;
+import org.axonframework.modelling.saga.SagaLifecycle;
 import org.axonframework.modelling.saga.StartSaga;
 import org.axonframework.queryhandling.QueryGateway;
 import org.axonframework.spring.stereotype.Saga;
@@ -18,9 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.ProcessPaymentCommand;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.ReserveProductCommand;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.PaymentProcessedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.ProductReservedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.query.FetchUserPaymentDetailsQuery;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.user.User;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.ApproveOrderCommand;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderApprovedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderCreatedEvent;
 
 @Saga
@@ -100,5 +105,21 @@ public class OrderSaga {
 		if(result==null) {
 			LOGGER.info("The ProcessPaymentCommand is null. Initialting compensating transaction");
 		}
+	}
+	
+	@SagaEventHandler(associationProperty = "orderId")
+	public void handle(PaymentProcessedEvent ppe) {
+		
+		ApproveOrderCommand aoc = new ApproveOrderCommand(ppe.getOrderId());
+		cg.send(aoc);
+		
+	}
+	
+	@SagaEventHandler(associationProperty = "orderId")
+	@EndSaga
+	public void handle(OrderApprovedEvent oae) {
+		LOGGER.info("Order approved for order id:"+oae.getOrderId());
+		
+		
 	}
 }

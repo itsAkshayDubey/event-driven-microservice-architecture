@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.entity.Order;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderApprovedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderCreatedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.repo.OrderRepo;
 
@@ -23,6 +24,19 @@ public class OrderProjection {
 		BeanUtils.copyProperties(oce, order);
 		
 		repo.save(order);
+		
+	}
+	
+	@EventHandler
+	void on(OrderApprovedEvent oae) {
+		Order order = repo.findByOrderId(oae.getOrderId());
+		
+		if(order == null)
+			return;
+		
+		order.setOrderStatus(oae.getOrderStatus());
+		repo.save(order);
+				
 		
 	}
 	

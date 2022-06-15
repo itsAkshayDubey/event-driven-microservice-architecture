@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.ReserveProductCommand;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.rest.OrderStatus;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderApprovedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderCreatedEvent;
 
 @Aggregate
@@ -45,6 +46,18 @@ public class OrderAggregate {
 		this.addressId = oce.getAddressId();
 		this.orderStatus = oce.getOrderStatus();
 
+	}
+	
+	@CommandHandler
+	public void handle(ApproveOrderCommand aoc) {
+		OrderApprovedEvent oae = new OrderApprovedEvent(aoc.getOrderId());
+		AggregateLifecycle.apply(oae);
+	}
+	
+	@EventSourcingHandler
+	public void on(OrderApprovedEvent oae) {
+		this.orderStatus = oae.getOrderStatus();
+		
 	}
 
 }
