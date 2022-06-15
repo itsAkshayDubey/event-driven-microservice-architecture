@@ -11,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
+import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.CancelProductReservationCommand;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.ReserveProductCommand;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.ProductReservationCancelledEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.ProductReservedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.events.ProductCreatedEvent;
 
@@ -74,6 +76,24 @@ public class ProductAggregate {
 	@EventSourcingHandler
 	public void on(ProductReservedEvent pre) {
 		this.quantity -= pre.getQuantity();
+	}
+	
+	@CommandHandler
+	public void handle(CancelProductReservationCommand cprc) {
+		ProductReservationCancelledEvent prce = ProductReservationCancelledEvent.builder()
+				.orderId(cprc.getOrderId())
+				.productId(cprc.getProductId())
+				.quantity(cprc.getQuantity())
+				.userId(cprc.getUserId())
+				.message(cprc.getMessage())
+				.build();
+		
+		AggregateLifecycle.apply(prce);
+	}
+	
+	@EventSourcingHandler
+	public void on(ProductReservationCancelledEvent prce) {
+		this.quantity += prce.getQuantity();
 	}
 	
 }

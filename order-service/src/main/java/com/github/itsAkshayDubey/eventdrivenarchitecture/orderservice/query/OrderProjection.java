@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.entity.Order;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderApprovedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderCreatedEvent;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderRejectEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.repo.OrderRepo;
 
 @Component
@@ -38,6 +39,17 @@ public class OrderProjection {
 		repo.save(order);
 				
 		
+	}
+	
+	@EventHandler
+	void on(OrderRejectEvent ore) {
+		Order order = repo.findByOrderId(ore.getOrderId());
+		
+		if(order == null)
+			return;
+		
+		order.setOrderStatus(ore.getOrderStatus());
+		repo.save(order);
 	}
 	
 

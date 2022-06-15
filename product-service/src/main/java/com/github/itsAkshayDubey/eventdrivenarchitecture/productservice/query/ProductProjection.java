@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.ProductReservationCancelledEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.ProductReservedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.entity.Product;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.events.ProductCreatedEvent;
@@ -49,6 +50,13 @@ public class ProductProjection {
 		LOGGER.info("ProductReservedEvent for orderId:"+pre.getOrderId()+" and productId: "+pre.getProductId());
 		Product product = repo.findByProductId(pre.getProductId());
 		product.setQuantity(product.getQuantity() - pre.getQuantity());
+		repo.save(product);
+	}
+	
+	@EventHandler
+	public void on(ProductReservationCancelledEvent prce) {
+		Product product = repo.findByProductId(prce.getProductId());
+		product.setQuantity(product.getQuantity() + prce.getQuantity());
 		repo.save(product);
 	}
 	

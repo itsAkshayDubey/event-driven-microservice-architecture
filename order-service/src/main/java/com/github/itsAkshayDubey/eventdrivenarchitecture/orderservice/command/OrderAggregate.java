@@ -11,6 +11,7 @@ import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.ReservePro
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.rest.OrderStatus;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderApprovedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderCreatedEvent;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderRejectEvent;
 
 @Aggregate
 public class OrderAggregate {
@@ -58,6 +59,18 @@ public class OrderAggregate {
 	public void on(OrderApprovedEvent oae) {
 		this.orderStatus = oae.getOrderStatus();
 		
+	}
+	
+	@CommandHandler
+	public void handle(RejectOrderCommand roc) {
+		OrderRejectEvent ore = new OrderRejectEvent(roc.getOrderId(), roc.getMessage());
+		
+		AggregateLifecycle.apply(ore);
+	}
+	
+	@EventSourcingHandler
+	public void on(OrderRejectEvent ore) {
+		this.orderStatus = ore.getOrderStatus();
 	}
 
 }
