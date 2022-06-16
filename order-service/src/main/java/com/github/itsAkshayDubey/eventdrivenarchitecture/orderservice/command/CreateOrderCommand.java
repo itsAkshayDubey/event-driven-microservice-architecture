@@ -2,7 +2,7 @@ package com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.rest.OrderStatus;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.model.OrderStatus;
 
 import lombok.Builder;
 import lombok.Data;

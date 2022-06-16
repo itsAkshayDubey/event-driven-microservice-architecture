@@ -13,6 +13,7 @@ import org.axonframework.modelling.saga.SagaEventHandler;
 import org.axonframework.modelling.saga.SagaLifecycle;
 import org.axonframework.modelling.saga.StartSaga;
 import org.axonframework.queryhandling.QueryGateway;
+import org.axonframework.queryhandling.QueryUpdateEmitter;
 import org.axonframework.spring.stereotype.Saga;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,8 @@ import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.Re
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderApprovedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderCreatedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderRejectEvent;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.model.OrderSummary;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.query.FindOrderQuery;
 
 @Saga
 public class OrderSaga {
@@ -42,6 +45,9 @@ public class OrderSaga {
 	
 	@Autowired
 	private transient QueryGateway qg;
+	
+	@Autowired
+	private transient QueryUpdateEmitter que;
 	
 	@SagaEventHandler(associationProperty = "orderId")
 	@StartSaga
@@ -141,6 +147,8 @@ public class OrderSaga {
 	public void handle(OrderApprovedEvent oae) {
 		LOGGER.info("Order approved for order id:"+oae.getOrderId());
 		
+		que.emit(FindOrderQuery.class, query -> true, new OrderSummary(oae.getOrderId(), oae.getOrderStatus(),""));
+		
 		
 	}
 	
@@ -154,6 +162,7 @@ public class OrderSaga {
 	@EndSaga
 	public void handle(OrderRejectEvent ore) {
 		LOGGER.info("Order rejected for order id: "+ore.getOrderId());
+		que.emit(FindOrderQuery.class, query -> true, new OrderSummary(ore.getOrderId(), ore.getOrderStatus(), ore.getMessage()));
 	}
 }
 

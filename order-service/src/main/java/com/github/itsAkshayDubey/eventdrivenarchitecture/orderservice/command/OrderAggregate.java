@@ -8,10 +8,10 @@ import org.axonframework.spring.stereotype.Aggregate;
 import org.springframework.beans.BeanUtils;
 
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.command.ReserveProductCommand;
-import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.rest.OrderStatus;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderApprovedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderCreatedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.events.OrderRejectEvent;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.model.OrderStatus;
 
 @Aggregate
 public class OrderAggregate {

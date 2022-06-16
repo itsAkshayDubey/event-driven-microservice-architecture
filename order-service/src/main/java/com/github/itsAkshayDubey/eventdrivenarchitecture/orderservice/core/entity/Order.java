@@ -7,7 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.rest.OrderStatus;
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.model.OrderStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

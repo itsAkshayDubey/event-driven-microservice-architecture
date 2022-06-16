@@ -1,5 +1,7 @@
 package com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.command.rest;
 
+import com.github.itsAkshayDubey.eventdrivenarchitecture.orderservice.core.model.OrderStatus;
+
 import lombok.Data;
 
 @Data
