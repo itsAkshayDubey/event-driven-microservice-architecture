@@ -19,6 +19,12 @@ public class ProductServiceErrorHandler {
 		ErrorMessage error = new ErrorMessage(ex.getMessage(), new Date());
 		return new ResponseEntity<Object>(error,new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@ExceptionHandler(value = {IllegalArgumentException.class})
+	public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request){
+		ErrorMessage error = new ErrorMessage(ex.getMessage(), new Date());
+		return new ResponseEntity<Object>(error,new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 	@ExceptionHandler(value = {CommandExecutionException.class})
 	public ResponseEntity<Object> handleCommandExecutionException(CommandExecutionException ex, WebRequest request){
