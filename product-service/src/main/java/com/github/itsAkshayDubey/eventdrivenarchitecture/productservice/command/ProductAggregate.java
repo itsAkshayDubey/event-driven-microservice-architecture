@@ -17,7 +17,7 @@ import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.ProductRese
 import com.github.itsAkshayDubey.eventdrivenarchitecture.core.events.ProductReservedEvent;
 import com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.core.events.ProductCreatedEvent;
 
-@Aggregate
+@Aggregate(snapshotTriggerDefinition = "productSnapshotTriggerDefinition")
 public class ProductAggregate {
 	
 	private final Logger LOGGER = LoggerFactory.getLogger(ProductAggregate.class);

@@ -69,6 +69,9 @@ public class OrderSaga {
 					CommandResultMessage<? extends Object> arg1) {
 				if(arg1.isExceptional()) {
 					
+					RejectOrderCommand roc = new RejectOrderCommand(oce.getOrderId(), arg1.exceptionResult().getMessage());
+					cg.send(roc);
+					
 				}
 				
 			}
