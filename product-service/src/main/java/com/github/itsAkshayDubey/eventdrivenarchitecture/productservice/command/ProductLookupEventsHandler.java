@@ -2,6 +2,7 @@ package com.github.itsAkshayDubey.eventdrivenarchitecture.productservice.command
 
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventhandling.ResetHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,11 @@ public class ProductLookupEventsHandler {
 		ProductLookupEntity entity = new ProductLookupEntity(event.getProductId(), event.getTitle());
 		
 		repo.save(entity);
+	}
+	
+	@ResetHandler
+	public void reset() {
+		repo.deleteAll();
 	}
 
 }
