@@ -14,3 +14,6 @@ do
 		cd ..
 	fi
 done
+echo "Please wait while all services get registered with eureka...Wait still the script terminates, this may take upto 100s"
+sleep 100
+echo "Ready to roll!!"
