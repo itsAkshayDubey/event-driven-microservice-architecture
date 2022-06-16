@@ -1,5 +1,6 @@
-APP_NAME=axonserver
-nohup java -jar $APP_NAME.jar >> $APP_NAME-nohup.log 2>>$APP_NAME-nohup-error.log  &
+APP_NAME=user-service
+VERSION=0.0.1-SNAPSHOT
+nohup java -jar target/$APP_NAME-$VERSION.jar >> $APP_NAME-nohup.log 2>>$APP_NAME-nohup-error.log  &
 PID=`echo $!`
 returnCode=`echo $?`
 if [ $returnCode == 0 ]
