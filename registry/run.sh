@@ -1,4 +1,4 @@
-APP_NAME=eureka-server
+APP_NAME=registry
 VERSION=0.0.1-SNAPSHOT
 nohup java -jar target/$APP_NAME-$VERSION.jar >> $APP_NAME-nohup.log 2>>$APP_NAME-nohup-error.log  &
 PID=`echo $!`

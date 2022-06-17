@@ -1,4 +1,4 @@
-APP_NAME=eureka-server
+APP_NAME=registry
 VERSION=0.0.1-SNAPSHOT
 if [ -f $APP_NAME.pid ]
 then
