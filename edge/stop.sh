@@ -1,4 +1,4 @@
-APP_NAME=api-gateway
+APP_NAME=edge
 VERSION=0.0.1-SNAPSHOT
 if [ -f $APP_NAME.pid ]
 then
