@@ -2,11 +2,11 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: ORDER-SERVICE
-        uri: lb://ORDER-SERVICE
+      - id: ORDERS
+        uri: lb://ORDERS
         predicates:
         - Path=/api/orders
-      - id: PRODUCT-SERVICE
-        uri: lb://PRODUCT-SERVICE
+      - id: PRODUCTS
+        uri: lb://PRODUCTS
         predicates:
         - Path=/api/product
