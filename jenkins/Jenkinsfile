@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh "cd jenkins/scripts"
+                sh "sh build.sh"
+                sh "cd ../.."
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "cd jenkins/scripts"
+                sh "sh/deploy.sh"
+                sh "cd ../.."
+            }
+        }
+        stage('Complete') {
+            steps {
+                sh "echo 'Done!'"
+            }
+        }
+    }
+}
