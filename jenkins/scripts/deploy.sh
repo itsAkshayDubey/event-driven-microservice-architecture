@@ -1,8 +1,13 @@
 #!/bin/bash
 APPS="axon-server registry edge products orders users payments"
+
+
 echo ">>>>> Stopping <<<<<"
 sh stop-all.sh
 echo ">>>>> Deploying <<<<<"
+
+cd ../..
+
 for app in $APPS
 do
 	cd $app && sh run.sh

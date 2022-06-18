@@ -1,6 +1,8 @@
 #!/bin/bash
 APPS="registry edge core products orders users payments"
 
+cd ../..
+
 for app in $APPS
 do
 	cd $app && mvn clean install

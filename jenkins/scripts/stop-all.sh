@@ -1,6 +1,8 @@
 #!/bin/bash
 APPS="axon-server registry edge products orders users payments"
 
+cd ../..
+
 for app in $APPS
 do
 	cd $app && sh stop.sh
