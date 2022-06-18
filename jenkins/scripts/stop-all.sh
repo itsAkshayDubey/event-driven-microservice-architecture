@@ -7,7 +7,7 @@ for app in $APPS
 do
 	cd $app && sh stop.sh
 	returnCode=`echo $?`
-	if [ $returnCode != 0 ]
+	if [ "$returnCode" -ne 0 ]
 	then
 		exit $returnCode
 	else

@@ -7,7 +7,7 @@ for app in $APPS
 do
 	cd $app && mvn clean install
 	returnCode=`echo $?`
-	if [ $returnCode == 0 ]
+	if [ "$returnCode" -eq 0 ]
 	then
 			echo ">>>>>>>>Build successfull for $app.<<<<<<<<<"
 			cd ..

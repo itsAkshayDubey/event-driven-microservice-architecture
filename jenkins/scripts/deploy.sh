@@ -12,7 +12,7 @@ for app in $APPS
 do
 	cd $app && sh run.sh
 	returnCode=`echo $?`
-	if [ $returnCode != 0 ]
+	if [ "$returnCode" -ne 0 ]
 	then
 		exit $returnCode
 	else
