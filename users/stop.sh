@@ -1,4 +1,4 @@
-APP_NAME=user-service
+APP_NAME=users
 VERSION=0.0.1-SNAPSHOT
 if [ -f $APP_NAME.pid ]
 then
