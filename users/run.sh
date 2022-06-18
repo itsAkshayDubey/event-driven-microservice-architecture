@@ -1,4 +1,4 @@
-APP_NAME=user-service
+APP_NAME=users
 VERSION=0.0.1-SNAPSHOT
 nohup java -jar target/$APP_NAME-$VERSION.jar >> $APP_NAME-nohup.log 2>>$APP_NAME-nohup-error.log  &
 PID=`echo $!`

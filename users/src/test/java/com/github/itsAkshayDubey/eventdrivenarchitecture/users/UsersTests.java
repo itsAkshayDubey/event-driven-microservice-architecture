@@ -1,10 +1,10 @@
-package com.github.itsAkshayDubey.eventdrivenarchitecture.userservice;
+package com.github.itsAkshayDubey.eventdrivenarchitecture.users;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserServiceApplicationTests {
+class UsersTests {
 
 //	@Test
 //	void contextLoads() {

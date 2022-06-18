@@ -1,4 +1,4 @@
-package com.github.itsAkshayDubey.eventdrivenarchitecture.userservice.query;
+package com.github.itsAkshayDubey.eventdrivenarchitecture.users.query;
 
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;

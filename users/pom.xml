@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.itsAkshayDubey.event-driven-architecture</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>users</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user-service</name>
+	<name>users</name>
 	<description>User Service</description>
 	<properties>
 		<java.version>1.8</java.version>
