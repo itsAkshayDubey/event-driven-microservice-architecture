@@ -1,5 +1,5 @@
 #!/bin/bash
-APPS="axon-server eureka-server api-gateway product-service order-service user-service payment-service"
+APPS="axon-server registry edge products orders users payments"
 
 for app in $APPS
 do

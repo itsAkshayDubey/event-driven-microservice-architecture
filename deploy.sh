@@ -1,5 +1,5 @@
 #!/bin/bash
-APPS="axon-server eureka-server api-gateway product-service order-service user-service payment-service"
+APPS="axon-server registry edge products orders users payments"
 echo ">>>>> Stopping <<<<<"
 sh stop-all.sh
 echo ">>>>> Deploying <<<<<"
@@ -14,6 +14,6 @@ do
 		cd ..
 	fi
 done
-echo "Please wait while all services get registered with eureka...Wait still the script terminates, this may take upto 100s"
+echo "Please wait while all services get registered with eureka...Wait till this script terminates, this may take upto 100s"
 sleep 100
 echo "Ready to roll!!"

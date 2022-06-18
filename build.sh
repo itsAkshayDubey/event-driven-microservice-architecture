@@ -1,5 +1,5 @@
 #!/bin/bash
-APPS="eureka-server api-gateway core product-service order-service user-service payment-service"
+APPS="registry edge core products orders users payments"
 
 for app in $APPS
 do
