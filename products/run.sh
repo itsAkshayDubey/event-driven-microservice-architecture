@@ -1,5 +1,5 @@
 APP_NAME=products
-VERSION=0.0.1-SNAPSHOT
+VERSION=`xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml`
 nohup java -jar target/$APP_NAME-$VERSION.jar >> $APP_NAME-nohup.log 2>>$APP_NAME-nohup-error.log  &
 PID=`echo $!`
 returnCode=`echo $?`
