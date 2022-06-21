@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.github.itsAkshayDubey.event-driven-architecture</groupId>
 	<artifactId>orders</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>orders</name>
 	<description>Order Server</description>
 	<properties>
